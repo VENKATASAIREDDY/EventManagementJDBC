@@ -28,6 +28,13 @@ class EventManagementTest {
 		service=null;
 	}
 	
+	@Test
+	@DisplayName("EventDetails should retrive")
+	void eventDetailsShouldDisplay() throws EventManagementException {
+		String actual = service.add(new Event("E105","Birthday",LocalDate.parse("2021-11-19"),"Ongole",8000.0)); 
+		String expected="E105";
+		assertEquals(expected,actual);
+	}
 
 	
 	@Test
@@ -43,5 +50,11 @@ class EventManagementTest {
 		boolean actual = service.delete("E100");
 		boolean expected=true;
 		assertEquals(expected,actual);
+	}
+	
+	@Test
+	@DisplayName("Event Delete should throw Exception.")
+	void eventDeleteShouldThrowException() throws EventManagementException {
+		assertThrows(EventManagementException.class,()->{service.delete("E50");});
 	}
 }
